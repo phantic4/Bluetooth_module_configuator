@@ -1,0 +1,9 @@
+﻿cmake_minimum_required(VERSION 3.20)
+project(bluetooth_module_configurator LANGUAGES CXX)
+
+add_executable(bluetooth_module_configurator WIN32 src/main.cpp)
+target_compile_features(bluetooth_module_configurator PRIVATE cxx_std_17)
+target_compile_definitions(bluetooth_module_configurator PRIVATE UNICODE _UNICODE)
+target_link_libraries(bluetooth_module_configurator PRIVATE comctl32 dwmapi)
+
+
