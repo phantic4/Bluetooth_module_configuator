@@ -1,0 +1,10 @@
+^C:\USERS\SHRI.000\DESKTOP\ROBOTICS\BLUETOOTH_MODULE_CONFIGURATOR\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/shri.000/Desktop/robotics/bluetooth_module_configurator -BC:/Users/shri.000/Desktop/robotics/bluetooth_module_configurator/build --check-stamp-file C:/Users/shri.000/Desktop/robotics/bluetooth_module_configurator/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
