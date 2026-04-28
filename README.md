@@ -21,7 +21,7 @@ This is useful for HM-10 style modules and other common Bluetooth serial modules
 
 ## Download the EXE
 
-The software can be downloaded from the the [/build/release](https://github.com/phantic4/Bluetooth_module_configuator/blob/main/build/Release/bluetooth_module_configurator.exe?raw=1) folder
+The software can be downloaded from the the [/build/release](https://github.com/phantic4/Bluetooth_module_configuator/blob/main/build/Release/bluetooth_module_configurator.exe) folder
 
 ## If Windows Blocks the EXE
 
