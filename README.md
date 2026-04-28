@@ -1,41 +1,107 @@
-# Bluetooth Module Configurator
+﻿# Bluetooth Module Configurator
 
-A Windows C++ GUI for configuring UART Bluetooth modules through a USB-to-TTL adapter.
+This program lets you change settings on Bluetooth modules with AT commands by using a USB-to-TTL adapter.
 
-It supports command presets for:
+You can use it to change things like:
 
-- HM-10 / BLE UART-style modules
-- HC-05
-- HC-06
-- Generic AT command modules
+- module name
+- baud rate
+- role
+- PIN if needed
 
-## Wiring
+This is useful for HM-10 style modules and other common Bluetooth serial modules.
 
-USB-to-TTL TX goes to module RX.
-USB-to-TTL RX goes to module TX.
-USB-to-TTL GND goes to module GND.
-Use the correct voltage level for your module.
+## What You Need
 
-## Build
+- a Windows computer
+- a USB-TTL adapter or USB-to-TTL cable
+- your Bluetooth module
+- The TTL-to-Bluetooth-pin Dupont cable if you use one
+- this program: `bluetooth_module_configurator.exe`
 
-Open a Developer PowerShell or Developer Command Prompt with CMake available, then run:
+## Download the EXE
 
-```bat
-build.bat
-```
+The software can be downloaded from the the [/build/release](https://github.com/phantic4/Bluetooth_module_configuator/blob/main/build/Release/bluetooth_module_configurator.exe?raw=1) folder
 
-The app will be built at:
+## If Windows Blocks the EXE
 
-```text
-build\Release\bluetooth_module_configurator.exe
-```
+Do this:
 
-## Notes
+1. Find the EXE file in File Explorer.
+2. Right-click the EXE.
+3. Click `Properties`.
+4. Find the `Unblock` checkbox near the bottom.
+5. Check the box.
+6. Click `Apply`.
+7. Click `OK`.
+8. Run the EXE again.
 
-Different clone modules use different AT command sets. The presets cover common HM-10, HC-05, and HC-06 commands, and the raw command box lets you send anything manually.
+## How to Hook It Up
 
-HM-10 AT mode usually works when the module is not connected over BLE. Many HM-10 firmwares use commands without CR/LF.
+1. Grab your USB-to-TTL adapter.
+2. Plug the USB-TTL adapter into a USB port on the Dell OptiPlex.
+3. Grab the TTL-to-Bluetooth-pin Dupont cable.
+4. Plug the custom adapter into the USB-to-TTL adapter making sure the ground wire on the TTL-Bluetooth-pin cable is connected to the ground cable on the USB-TTL cable.
+5. Plug the Bluetooth module into the other end of teh dupont cable making sure the red wire on the other end is connected to the VCC pin.
+7. The module should have a slow blinking red LED and if the module is getting hot unplug all the wires immediately.
 
-HC-05 AT mode normally requires the KEY/EN pin held high during power-up, often at 38400 baud, and commands usually use CR/LF.
+## How to Find the COM Port
 
-HC-06 modules are usually slave-only and often use commands without CR/LF.
+1. In the search bar, search up Device Manager
+2. To down to the ports tab
+3. Tlick on the arrow
+4. The line where it says something like usb-tll with a COM## next to it
+
+If Device manager is blocked on the computer, follow the steps below
+
+
+1. Open Arduino IDE.
+2. Click `Tools`.
+3. Look at `Port` and remember the ports you already see.
+4. Unplug the USB-to-TTL adapter.
+5. Plug the USB-to-TTL adapter back in.
+6. Click `Tools` then `Port` again.
+7. The new port that appeared is the one for your USB-to-TTL adapter.
+8. Remember that COM port number, like `COM3` or `COM7`.
+
+## How to Use the Program
+
+1. Open `bluetooth_module_configurator.exe`.
+2. In the `COM port` box, type the COM port you found in device manager or Arduino IDE, like `COM5`.
+3. In the `Connect baud` box, start with `9600` unless your module uses something else.
+4. Leave the module preset on the correct module type.
+5. Click `Connect`.
+6. Look at the message box on the right.
+7. If the connection works, you can now send AT commands by using the buttons.
+
+## How to Rename an HM-10 Module
+
+This is the basic way to rename modules one by one.
+
+
+1. Click in the `New name` box.
+2. Type the new name, like `Robot1`.
+3. Click `Set Name`.
+4. Watch the message box on the right.
+5. The program will send the AT command for the rename.
+6. If you get an `RX` response showing the change worked, that module is done.
+
+
+## If It Does Not Work
+
+Try these steps:
+
+1. Make sure the module is plugged in correctly.
+2. Make sure the module has power.
+3. Make sure the red LED is slowly blinking
+3. Make sure you typed the correct COM port.
+4. Try `9600` baud first.
+5. Make sure the module is not already connected to another device.
+6. Try clicking `Test AT` first.
+7. Watch the message box for the `RX` response.
+
+## What the Message Box Means
+
+- `TX` means the program sent a command.
+- `RX` means the module sent data back.
+- If the RX is showing random symbol, then the module might have a problem or the wiring to the module is incorrect
